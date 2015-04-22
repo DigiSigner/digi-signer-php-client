@@ -40,10 +40,13 @@ try {
 	$document->addSigner($signer2);
 	
 	$request->addDocument($document);
+	
+	$request->setEmbedded(false);
+	$request->setSendEmails(true);
+	
 	$signatureRequest = $client->sendSignatureRequest($request);
 
-	print_r($signatureRequest->getId());
-	print_r($signatureRequest->getDocuments());	
+	print_r($signatureRequest);
 		
 } catch(DigiSignerException $e) {
 	echo "Some exception happened...\n";

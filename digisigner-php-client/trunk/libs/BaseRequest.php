@@ -68,9 +68,11 @@ class BaseRequest {
 			}
 		}
 		
-		$requestData = new \stdClass;
+		$requestData = $request->export();
 		$requestData->documents = $docs;		
 		$postData = json_encode($requestData);
+		
+		print_r($postData);
 		
 		$curl = $this->getCurler();
 		$curl->setUrl(Config::instance()->signature_requests_url);
