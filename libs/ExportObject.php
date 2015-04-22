@@ -27,7 +27,7 @@ abstract class ExportObject {
 		
 		$export = new \stdClass;
 		foreach($this->exportProps as $prop) {
-			if(property_exists($this, $prop)) {
+			if(property_exists($this, $prop) && !is_null($this->$prop)) {
 				
 				if(is_array($this->$prop)) {
 					foreach($this->$prop as $key => $item) {
