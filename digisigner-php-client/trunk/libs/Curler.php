@@ -85,6 +85,8 @@ class Curler {
 		curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, 0);
 		
+		curl_setopt($this->ch, CURLOPT_SAFE_UPLOAD, 0);
+		
 		if(!empty($this->requestHeaders)) {
 			curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->requestHeaders);	
 		}
@@ -108,7 +110,14 @@ class Curler {
 		$this->response = curl_exec ($this->ch);
 		$this->statusCode = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
 		
-		$this->debugMode && $this->debugInfo = 	curl_getinfo($this->ch);
+		if($this->debugMode) {
+			$this->debugInfo = 	curl_getinfo($this->ch);
+			$info = array(
+				'stats_data' => $this->debugInfo,
+				'response' => $this->response
+			);
+			print_r($info);
+		}
 		
 		curl_close($this->ch);
 				

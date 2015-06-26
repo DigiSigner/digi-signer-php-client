@@ -58,10 +58,11 @@ abstract class ExportObject {
 	public function fromObject($plainObject) {
 		foreach($plainObject as $property => $value) {
 			
+			/** policy has chaged, now we import everything
 			if(!property_exists($this, $property)) {
 				throw new DigiSignerException("Property '$property' must exist in ".get_called_class(). " and be writable by parent class (protected) for proper import.");
 			}
-			
+			*/
 			
 			if($this->hasCollection($property) && is_array($value)) {
 				

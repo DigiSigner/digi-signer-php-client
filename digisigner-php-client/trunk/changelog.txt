@@ -1,0 +1,10 @@
+0.2.3
+
+Changes to SignatureRequest class:
+- new properties and setters for them added
+	$use_text_tags => [set|get]UseTextTags([true|false])
+	$hide_text_tags => [set|get]HideTextTags([true|false])
+    $redirect_for_signing_to_url => [set|get]RedirectForSigningToUrl([$url]);
+    
+- policy of importing properties from API JSON response changed to import whatever comes
+in the payload; so, non-existing properties will also be populated.
