@@ -43,6 +43,9 @@ try {
 	
 	$request->setEmbedded(false);
 	$request->setSendEmails(true);
+	$request->setRedirectForSigningToUrl('http://myredirecturl.com/');
+	$request->setUseTextTags(true);
+	$request->setHideTextTags(true);
 	
 	$signatureRequest = $client->sendSignatureRequest($request);
 

@@ -71,9 +71,7 @@ class BaseRequest {
 		$requestData = $request->export();
 		$requestData->documents = $docs;		
 		$postData = json_encode($requestData);
-		
-		print_r($postData);
-		
+				
 		$curl = $this->getCurler();
 		$curl->setUrl(Config::instance()->signature_requests_url);
 		$curl->addHeader('Content-Type: application/json');
