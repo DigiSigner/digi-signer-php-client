@@ -1,7 +1,7 @@
 <?php
 /**
  * DigiSigner Client Library
- * v.0.2.3
+ * v.0.2.4
  * Requires:
  * - PHP version >= 5.3.0
  * - php curl module;
