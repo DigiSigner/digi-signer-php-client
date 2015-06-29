@@ -68,7 +68,10 @@ abstract class ExportObject {
 				
 				$fullClassName = __NAMESPACE__ .'\\'. $this->getCollectionClass($property);
 
-				//import collection residing in $value recursively
+				//clear the collection
+				$this->{$property} = array();
+				
+				//and import collection residing in $value recursively from stdClass object, reflecting the JSON data received
 				foreach($value as $object) {
 					$collectionItem = new $fullClassName;
 			

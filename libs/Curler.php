@@ -17,14 +17,14 @@ class Curler {
 	private $debugInfo = array();
 	private $encoding = 'UTF-8';
 	
-	public $debugMode = false;
-	 
+	protected $debugMode = false;
+	
 	
 	public function __construct() {
 		$this->ch = curl_init();
 		$this->timeout = Config::instance()->curl_timeout;
 	}
-	
+		
 	public function setUrl($url) {
 		$this->url = $url;
 	}
@@ -35,9 +35,14 @@ class Curler {
 	
 	public function attachFile($path, $filename) {
 		
-		$post = array(
-			'file'=>'@'.$path . ';filename=' . $filename,
-		);
+		if(class_exists('CURLFile')) {//works on PHP v >= 5.5
+			$cfile = new \CURLFile($path, '', $filename);
+			$post = array('file' => $cfile);
+		} else {
+			$post = array(
+				'file'=>'@'.$path . ';filename=' . $filename,
+			);	
+		}
 		
 		$this->setPostData($post);
 		
@@ -85,7 +90,7 @@ class Curler {
 		curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, 0);
 		
-		curl_setopt($this->ch, CURLOPT_SAFE_UPLOAD, 0);
+		//curl_setopt($this->ch, CURLOPT_SAFE_UPLOAD, 0);
 		
 		if(!empty($this->requestHeaders)) {
 			curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->requestHeaders);	
@@ -106,6 +111,7 @@ class Curler {
 			curl_setopt($this->ch, CURLINFO_HEADER_OUT, 1);
 			curl_setopt($this->ch, CURLOPT_VERBOSE, 1);
 		}
+		
 		
 		$this->response = curl_exec ($this->ch);
 		$this->statusCode = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
