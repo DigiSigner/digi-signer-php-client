@@ -1,3 +1,8 @@
+0.2.5
+
+Added new property redirect_after_signing_to_url to the SignatureRequest class to
+redirect the user to the specified URL after document signing.
+
 0.2.4
 
 Curl file upload policy has changed to use CurlFile on PHP versions >= 5.5.
