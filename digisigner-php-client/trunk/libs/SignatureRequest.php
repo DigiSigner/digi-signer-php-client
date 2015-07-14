@@ -8,6 +8,7 @@ class SignatureRequest extends ExportObject {
 	protected $documents = array();
 	protected $is_completed = null;
 	protected $redirect_for_signing_to_url = null;
+	protected $redirect_after_signing_to_url = null;
 	protected $use_text_tags = null;
 	protected $hide_text_tags = null;
 	
@@ -26,7 +27,7 @@ class SignatureRequest extends ExportObject {
 	 * when creating JSON. Those, not mentioned in the array, or NULL props will be ignored 
 	 */
 	protected $exportProps = array(
-		'send_emails', 'embedded', 'redirect_for_signing_to_url', 'use_text_tags', 'hide_text_tags'
+		'send_emails', 'embedded', 'redirect_for_signing_to_url', 'redirect_after_signing_to_url', 'use_text_tags', 'hide_text_tags'
 	);
 	
 	public function setId($id) {
@@ -56,6 +57,14 @@ class SignatureRequest extends ExportObject {
 	
 	public function getRedirectForSigningToUrl($url) {
 		return $this->redirect_for_signing_to_url;
+	}
+	
+	public function setRedirectAfterSigningToUrl($url) {
+		$this->redirect_after_signing_to_url = $url;
+	}
+	
+	public function getRedirectAfterSigningToUrl($url) {
+		return $this->redirect_after_signing_to_url;
 	}
 	
 	public function setUseTextTags($bool) {
