@@ -27,6 +27,7 @@ try {
 	$field1 = new Field(0, array(10,20,40,50), Field::TYPE_DATE);
 	$signer1->addField($field1);
 	$field2 = new Field(15, array(100,23,45,55), Field::TYPE_SIGNATURE);
+	$field2->setContent('Signature Content');
 	$signer1->addField($field2);
 	$signer1->setRole('SomeRole');
 	
