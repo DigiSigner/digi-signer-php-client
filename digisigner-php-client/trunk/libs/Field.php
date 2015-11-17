@@ -14,17 +14,26 @@ class Field extends ExportObject {
 	protected $rectangle = array();
 	protected $type = '';
 	
-	protected $exportProps = array('page', 'rectangle', 'type', 'required');
-	  
+	protected $exportProps = array('page', 'rectangle', 'type', 'content', 'label', 'required');
+
+	public $content = null;
+    public $label = null;
 	public $required = true;
-	
-	
+
 	public function __construct($page, $rectangle = array(), $type) {
 		$this->page = $page;
 		$this->rectangle = $rectangle;
 		$this->type = $type;
 	}
 	
+	public function setContent($content) {
+		$this->content = $content;
+	}
+
+	public function setLabel($label) {
+		$this->label = $label;
+	}
+
 	public function setRequired($bool) {
 		$this->required = $bool;
 	}
@@ -32,7 +41,4 @@ class Field extends ExportObject {
 	protected function getCollectionsMap() {
 		return array();//doesn't hold any collections in it's props
 	}
-	
-
-	
 }
