@@ -45,4 +45,9 @@ class Signer extends ExportObject {
 		return array('fields' => 'Field');
 	}
 
+  public function isSignatureCompleted() {
+    return $this->is_signature_completed;
+  }
+
+
 }
