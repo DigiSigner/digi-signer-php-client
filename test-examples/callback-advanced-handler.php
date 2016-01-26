@@ -13,6 +13,7 @@ use DigiSigner\DigiSignerException;
 // thus, you must read from the raw input 
 $raw_json = file_get_contents('php://input');
 
+const CONFIRMATION_TEXT = "DIGISIGNER_EVENT_ACCEPTED";
 if(!empty($raw_json)) {
 
 	try {
@@ -23,11 +24,13 @@ if(!empty($raw_json)) {
 		
 		foreach($signatureRequest->getDocuments() as $document) {
 			foreach($document->getSigners() as $signer) {
-				echo $signer->getEmail(), '; ';
-				
+				// the signer information can be read here: $signer->getEmail(), '; ';
 			}
 		}
-		
+
+		// Send only confirmation message with status OK (200), if got callback result.
+		echo CONFIRMATION_TEXT;
+
 	} catch(DigiSignerException $e) {
 		echo "Some exception happened...\n";
 		print("Status code: " .$e->getHttpCode()."\n");
