@@ -1,0 +1,9 @@
+{
+    "name": "sparemusic/digi-signer-php-client",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "SpareMusic\\DigiSigner\\": "src/"
+        }
+    }
+}
