@@ -37,6 +37,11 @@ class Document extends ExportObject {
 		}
     }
 	
+    public static function withId($id) {
+      $instance = new self();
+      $instance->document_id = $id;
+      return $instance;
+    }
  
 	public function setId($id) {
 		$this->document_id = $id;
