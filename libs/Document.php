@@ -10,13 +10,15 @@ class Document extends ExportObject {
 
     protected $document_id = '';
 
+	protected $title = '';
+
     protected $subject = '';
     
     protected $message = '';
     
     protected $signers = array();//collection of Signers instances
 	
-	protected $exportProps = array('document_id', 'subject', 'message', 'signers');
+	protected $exportProps = array('document_id', 'title', 'subject', 'message', 'signers');
 	
 	private $path = '';
 	private $filename = '';
@@ -58,7 +60,11 @@ class Document extends ExportObject {
 	public function getFilename() {
 		return $this->filename;
 	}
-	
+
+	public function setTitle($title) {
+		$this->title = $title;
+	}
+
 	public function setSubject($subject) {
 		$this->subject = $subject;
 	}

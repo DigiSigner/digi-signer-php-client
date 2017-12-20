@@ -6,10 +6,11 @@ class Signer extends ExportObject {
 	protected $email = '';
 	protected $role = null;
 	protected $fields = array();
+	protected $existing_fields = array();
 	protected $is_signature_completed = null;
 	protected $sign_document_url = null;
-	
-	protected $exportProps = array('email', 'role', 'fields');
+
+	protected $exportProps = array('email', 'role', 'fields', 'existing_fields');
 	
 	public function __construct($email = '') {
 		$this->email = $email;
@@ -36,7 +37,15 @@ class Signer extends ExportObject {
 	public function getFields() {
 		return $this->fields;
 	}
-	
+
+	public function addExistingField(ExistingField $existing_field) {
+		$this->existing_fields[] = $existing_field;
+	}
+
+	public function getExistingFields() {
+		return $this->existing_fields;
+	}
+
 	public function getSignDocumentUrl() {
 		return $this->sign_document_url;
 	}
