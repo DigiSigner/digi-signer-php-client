@@ -14,8 +14,9 @@ class Field extends ExportObject {
 	protected $rectangle = array();
 	protected $type = '';
 	
-	protected $exportProps = array('page', 'rectangle', 'type', 'content', 'label', 'required');
+	protected $exportProps = array('page', 'rectangle', 'type', 'api_id', 'content', 'label', 'required');
 
+	public $api_id = null;
 	public $content = null;
     public $label = null;
 	public $required = true;
@@ -25,7 +26,11 @@ class Field extends ExportObject {
 		$this->rectangle = $rectangle;
 		$this->type = $type;
 	}
-	
+
+	public function setApiId($api_id) {
+		$this->api_id = $api_id;
+	}
+
 	public function setContent($content) {
 		$this->content = $content;
 	}
