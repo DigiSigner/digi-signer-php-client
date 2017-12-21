@@ -82,6 +82,14 @@ class DigiSignerClient {
 	public function getSignatureRequest($signature_request_id) {
 		return $this->getRequest()->getSignatureRequest($signature_request_id);
 	}
-	
-	
+
+	/**
+	 * Returns document fields for a document.
+	 * @param String $document_id .
+	 * @return stdClass object with document fields details decoded
+	 *  from JSON response from DigiSigner
+	 */
+	public function getDocumentFields($document_id) {
+		return $this->getRequest()->getDocumentFields($document_id);
+	}
 }

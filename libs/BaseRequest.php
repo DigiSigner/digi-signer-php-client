@@ -96,8 +96,15 @@ class BaseRequest {
 		$request = new SignatureRequest;
 		return $request->fromObject($response->getBody());
 	}
-	
-	
+
+	public function getDocumentFields($document_id) {
+		$curl = $this->getCurler();
+		$curl->setUrl(Config::instance()->documents_url.'/'.$document_id.Config::instance()->fields_path);
+		$response = new DigiSignerResponse($curl->sendRequest());
+
+		$request = new DocumentFields;
+		return $request->fromObject($response->getBody());
+	}
     
     public function getApiKey() {
         return $this->api_key;

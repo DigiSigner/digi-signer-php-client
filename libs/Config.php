@@ -9,6 +9,7 @@ class Config {
 	public $server = "https://api.digisigner.com";
     public $version = "/v1";
 	public $param_doc_id = 'document_id';
+	public $fields_path = "/fields";
 	private $documents_path = '/documents';
 	private $signature_requests_path = '/signature_requests';
 	
