@@ -28,9 +28,7 @@ class BaseRequest {
 			
 			file_put_contents($dest_file_path, $response->getContent());
         }
-        
     }
-	
 	
 	/**
 	 * @param Document instance
@@ -54,7 +52,6 @@ class BaseRequest {
 		} else {
 			throw new DigiSignerException('ID of the uploaded document not found in server response.');
 		}
-	
 	}
 	
 	public function sendSignatureRequest(SignatureRequest $request) {
@@ -105,7 +102,14 @@ class BaseRequest {
 		$request = new DocumentFields;
 		return $request->fromObject($response->getBody());
 	}
-    
+
+	public function deleteDocument($document_id) {
+		$curl = $this->getCurler();
+		$curl->setUrl(Config::instance()->documents_url.'/'.$document_id);
+		$curl->setRequestMethod('DELETE');
+		$curl->sendRequest();
+	}
+
     public function getApiKey() {
         return $this->api_key;
     }

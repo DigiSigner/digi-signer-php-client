@@ -92,4 +92,12 @@ class DigiSignerClient {
 	public function getDocumentFields($document_id) {
 		return $this->getRequest()->getDocumentFields($document_id);
 	}
+
+	/**
+	 * Deletes document by given document id.
+	 * @param String $document_id.
+	 */
+	public function deleteDocument($document_id) {
+		$this->getRequest()->deleteDocument($document_id);
+	}
 }
