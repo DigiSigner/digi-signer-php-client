@@ -5,12 +5,13 @@ class Signer extends ExportObject {
 	
 	protected $email = '';
 	protected $role = null;
+	protected $order = null;
 	protected $fields = array();
 	protected $existing_fields = array();
 	protected $is_signature_completed = null;
 	protected $sign_document_url = null;
 
-	protected $exportProps = array('email', 'role', 'fields', 'existing_fields');
+	protected $exportProps = array('email', 'role', 'order', 'fields', 'existing_fields');
 	
 	public function __construct($email = '') {
 		$this->email = $email;
@@ -19,8 +20,7 @@ class Signer extends ExportObject {
 	public function getEmail() {
 		return $this->email;
 	}
-	
-	
+		
 	/** @param {string} $role */
 	public function setRole($role) {
 		return $this->role = $role;
@@ -29,7 +29,15 @@ class Signer extends ExportObject {
 	public function getRole() {
 		return $this->role;
 	}
-	
+
+  public function setOrder($order) {
+    return $this->order = $order;
+  }
+  
+  public function getOrder() {
+    return $this->order;
+  }
+  	
 	public function addField(Field $field) {
 		$this->fields[] = $field;
 	}
