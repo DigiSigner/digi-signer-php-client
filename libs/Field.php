@@ -8,7 +8,8 @@ class Field extends ExportObject {
 	const TYPE_INITIALS = 'INITIALS';
 	const TYPE_DATE = 'DATE';
 	const TYPE_CHECKBOX = 'CHECKBOX';
-	
+	const TYPE_RADIO = 'RADIO';
+	const TYPE_ATTACHMENT = 'ATTACHMENT';
 	
 	protected $page = null;
 	protected $rectangle = array();

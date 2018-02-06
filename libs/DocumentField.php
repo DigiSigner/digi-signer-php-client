@@ -8,6 +8,8 @@ class DocumentField extends ExportObject {
     const TYPE_INITIALS = 'INITIALS';
     const TYPE_DATE = 'DATE';
     const TYPE_CHECKBOX = 'CHECKBOX';
+    const TYPE_RADIO = 'RADIO';
+    const TYPE_ATTACHMENT = 'ATTACHMENT';
 
     const STATUS_EMPTY = 'EMPTY';
     const STATUS_FILLED = 'FILLED';
