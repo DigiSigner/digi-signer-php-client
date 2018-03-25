@@ -22,12 +22,14 @@ class SignatureRequest extends ExportObject {
 	 */
 	protected $embedded = null;
 	
+	protected $branding = array();
+	
 	/**
 	 * @var Array of property names that will be used for $this->export() method,
 	 * when creating JSON. Those, not mentioned in the array, or NULL props will be ignored 
 	 */
 	protected $exportProps = array(
-		'send_emails', 'embedded', 'redirect_for_signing_to_url', 'redirect_after_signing_to_url', 'use_text_tags', 'hide_text_tags'
+		'send_emails', 'embedded', 'redirect_for_signing_to_url', 'redirect_after_signing_to_url', 'use_text_tags', 'hide_text_tags', 'branding'
 	);
 	
 	public function setId($id) {
@@ -86,6 +88,14 @@ class SignatureRequest extends ExportObject {
 	public function getSendEmails() {
 		return $this->send_emails;
 	}
+	
+  public function getBranding() {
+    return $this->branding;
+  }
+  	
+  public function setBranding($branding) {
+    $this->branding[] = $branding;
+  }
 	
 	public function addDocument(Document $document) {
 		$this->documents[] = $document;
