@@ -11,7 +11,11 @@ class SignatureRequest extends ExportObject {
 	protected $redirect_after_signing_to_url = null;
 	protected $use_text_tags = null;
 	protected $hide_text_tags = null;
-	
+	protected $send_documents_as_bundle = null;
+	protected $bundle_title = null;
+	protected $bundle_subject = null;
+	protected $bundle_message = null;
+
 	/**
 	 * @var included to JSON call to API, if set to not null
 	 */
@@ -29,7 +33,8 @@ class SignatureRequest extends ExportObject {
 	 * when creating JSON. Those, not mentioned in the array, or NULL props will be ignored 
 	 */
 	protected $exportProps = array(
-		'send_emails', 'embedded', 'redirect_for_signing_to_url', 'redirect_after_signing_to_url', 'use_text_tags', 'hide_text_tags', 'branding'
+		'send_emails', 'embedded', 'redirect_for_signing_to_url', 'redirect_after_signing_to_url', 'use_text_tags',
+		'hide_text_tags', 'send_documents_as_bundle', 'bundle_title', 'bundle_subject', 'bundle_message', 'branding'
 	);
 	
 	public function setId($id) {
@@ -84,7 +89,39 @@ class SignatureRequest extends ExportObject {
 	public function getHideTextTags($bool) {
 		return $this->hide_text_tags;
 	}
-	
+
+	public function getSendDocumentsAsBundle() {
+		return $this->send_documents_as_bundle;
+	}
+
+	public function setSendDocumentsAsBundle($send_documents_as_bundle) {
+		$this->send_documents_as_bundle = $send_documents_as_bundle;
+	}
+
+	public function getBundleTitle() {
+		return $this->bundle_title;
+	}
+
+	public function setBundleTitle($bundle_title) {
+		$this->bundle_title = $bundle_title;
+	}
+
+	public function getBundleSubject() {
+		return $this->bundle_subject;
+	}
+
+	public function setBundleSubject($bundle_subject) {
+		$this->bundle_subject = $bundle_subject;
+	}
+
+	public function getBundleMessage() {
+		return $this->bundle_message;
+	}
+
+	public function setBundleMessage($bundle_message) {
+		$this->bundle_message = $bundle_message;
+	}
+
 	public function getSendEmails() {
 		return $this->send_emails;
 	}
