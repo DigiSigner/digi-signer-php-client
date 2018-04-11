@@ -28,6 +28,7 @@ class DocumentField extends ExportObject {
     protected $label = null;
     protected $required = false;
     protected $name = '';
+    protected $group_id = '';
     protected $index = null;
     protected $read_only = false;
     protected $pdf_field = false;
@@ -36,8 +37,8 @@ class DocumentField extends ExportObject {
     protected $alignment = ''; // see available alignments in ALIGNMENT_* constants
 
     protected $exportProps = array('api_id', 'role', 'type', 'page', 'rectangle', 'status', 'content',
-        'submitted_content', 'label', 'required', 'name', 'index', 'read_only', 'pdf_field', 'font_size', 'max_length',
-        'alignment');
+        'submitted_content', 'label', 'required', 'name', 'group_id', 'index', 'read_only', 'pdf_field', 'font_size',
+        'max_length', 'alignment');
 
 
     public function getApiId() {
@@ -92,6 +93,11 @@ class DocumentField extends ExportObject {
 
     public function getName() {
         return $this->name;
+    }
+
+
+    public function getGroupId() {
+        return $this->group_id;
     }
 
 

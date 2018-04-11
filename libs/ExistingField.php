@@ -4,12 +4,13 @@ namespace DigiSigner;
 class ExistingField extends ExportObject {
 
     protected $api_id = '';
+    protected $group_id = '';
     protected $content = null;
     protected $label = null;
     protected $required = null;
     protected $read_only = null;
 
-    protected $exportProps = array('api_id', 'content', 'label', 'required', 'read_only');
+    protected $exportProps = array('api_id', 'group_id', 'content', 'label', 'required', 'read_only');
 
     public function __construct($api_id = '') {
         $this->api_id = $api_id;
@@ -17,6 +18,14 @@ class ExistingField extends ExportObject {
 
     public function getApiId() {
         return $this->api_id;
+    }
+
+    public function getGroupId() {
+        return $this->group_id;
+    }
+
+    public function setGroupId($group_id) {
+        $this->group_id = $group_id;
     }
 
     public function getContent() {
