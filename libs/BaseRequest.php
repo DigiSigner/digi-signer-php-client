@@ -15,10 +15,10 @@ class BaseRequest {
 		return $curl;
 	}
 	
-	public function getFileResponse($document_id, $dest_file_path) {
+	public function getFileResponse($url, $dest_file_path) {
 
 		$curl = $this->getCurler();
-		$curl->setUrl(Config::instance()->documents_url.'/'.$document_id);
+		$curl->setUrl($url);
 		$response = new DigiSignerResponse($curl->sendRequest());
 		
 		if($response->isSuccessful()) {

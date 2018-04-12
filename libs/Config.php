@@ -10,6 +10,7 @@ class Config {
     public $version = "/v1";
 	public $param_doc_id = 'document_id';
 	public $fields_path = "/fields";
+	public $attachment_path = '/attachment';
 	private $documents_path = '/documents';
 	private $signature_requests_path = '/signature_requests';
 	

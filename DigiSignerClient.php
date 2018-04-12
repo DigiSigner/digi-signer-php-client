@@ -42,8 +42,9 @@ class DigiSignerClient {
 	 * @return void
 	 */
 	public function getDocument($document_id, $dest_file_path) {
+		$url = Config::instance()->documents_url.'/'.$document_id;
 
-		$this->getRequest()->getFileResponse($document_id, $dest_file_path);
+		$this->getRequest()->getFileResponse($url, $dest_file_path);
 	}
 	
 	/**
@@ -99,5 +100,17 @@ class DigiSignerClient {
 	 */
 	public function deleteDocument($document_id) {
 		$this->getRequest()->deleteDocument($document_id);
+	}
+
+	/**
+	 * Downloads a file for given document and attachment field by IDs.
+	 * @param String $document_id ID of document with attachment field
+	 * @param String $field_api_id API ID of field with attachment
+	 * @param String $dest_file_path destination path for attachments
+	 * @return void
+	 */
+	public function getDocumentAttachment($document_id, $field_api_id, $dest_file_path) {
+		$url = Config::instance()->documents_url.'/'.$document_id.Config::instance()->fields_path.'/'.$field_api_id.Config::instance()->attachment_path;
+		$this->getRequest()->getFileResponse($url, $dest_file_path);
 	}
 }
