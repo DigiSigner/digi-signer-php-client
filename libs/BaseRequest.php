@@ -4,21 +4,26 @@ namespace DigiSigner;
 class BaseRequest {
 
     private $api_key;
+	private $locale;
 
-    public function __construct($api_key) {
-        $this->api_key = $api_key;		
+    public function __construct($api_key, $locale) {
+        $this->api_key = $api_key;
+		$this->locale = $locale;
     }
 	
-	public function getCurler() {
+	public function getCurler($url) {
 		$curl = new Curler;
 		$curl->addAuthentication($this->api_key);
+		if (!empty($this->locale)) {
+			$curl->addHeader('Accept-Language: ' . $this->locale);
+		}
+		$curl->setUrl($url);
 		return $curl;
 	}
 	
 	public function getFileResponse($url, $dest_file_path) {
 
-		$curl = $this->getCurler();
-		$curl->setUrl($url);
+		$curl = $this->getCurler($url);
 		$response = new DigiSignerResponse($curl->sendRequest());
 		
 		if($response->isSuccessful()) {
@@ -35,10 +40,9 @@ class BaseRequest {
 	 * @return Document $document populated with ID, if upload has been successful
 	 * @throws DigiSignerException if no uploaded document ID received
 	 */
-	public function uploadDocument(Document $document) {
+	public function uploadDocument($url, Document $document) {
 				
-		$curl = $this->getCurler();
-		$curl->setUrl(Config::instance()->documents_url);
+		$curl = $this->getCurler($url);
 		$curl->setRequestMethod('POST');
 		$curl->attachFile($document->getPath(), $document->getFilename());
 		$response = new DigiSignerResponse($curl->sendRequest());
@@ -54,12 +58,12 @@ class BaseRequest {
 		}
 	}
 	
-	public function sendSignatureRequest(SignatureRequest $request) {
+	public function sendSignatureRequest($url, $uploadDocumentUrl, SignatureRequest $request) {
 		
 		$docs = array();
 		foreach($request->getDocuments() as $document) {
 			if(!$document->getId()) {
-				$docs[] = $this->uploadDocument($document)->export();
+				$docs[] = $this->uploadDocument($uploadDocumentUrl, $document)->export();
 			} else {
 				$docs[] = $document->export();
 			}
@@ -69,8 +73,7 @@ class BaseRequest {
 		$requestData->documents = $docs;		
 		$postData = json_encode($requestData);
 				
-		$curl = $this->getCurler();
-		$curl->setUrl(Config::instance()->signature_requests_url);
+		$curl = $this->getCurler($url);
 		$curl->addHeader('Content-Type: application/json');
 		$curl->setRequestMethod('POST');
 		$curl->setPostData($postData);
@@ -85,27 +88,25 @@ class BaseRequest {
 		}
 	}
 	
-	public function getSignatureRequest($signature_request_id) {
-		$curl = $this->getCurler();
-		$curl->setUrl(Config::instance()->signature_requests_url.'/'.$signature_request_id);
+	public function getSignatureRequest($url) {
+		$curl = $this->getCurler($url);
+
 		$response = new DigiSignerResponse($curl->sendRequest());
 		
 		$request = new SignatureRequest;
 		return $request->fromObject($response->getBody());
 	}
 
-	public function getDocumentFields($document_id) {
-		$curl = $this->getCurler();
-		$curl->setUrl(Config::instance()->documents_url.'/'.$document_id.Config::instance()->fields_path);
+	public function getDocumentFields($url) {
+		$curl = $this->getCurler($url);
 		$response = new DigiSignerResponse($curl->sendRequest());
 
 		$request = new DocumentFields;
 		return $request->fromObject($response->getBody());
 	}
 
-	public function deleteDocument($document_id) {
-		$curl = $this->getCurler();
-		$curl->setUrl(Config::instance()->documents_url.'/'.$document_id);
+	public function deleteDocument($url) {
+		$curl = $this->getCurler($url);
 		$curl->setRequestMethod('DELETE');
 		$curl->sendRequest();
 	}
