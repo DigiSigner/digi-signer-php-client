@@ -15,13 +15,14 @@ class Field extends ExportObject {
 	protected $rectangle = array();
 	protected $type = '';
 	
-	protected $exportProps = array('page', 'rectangle', 'type', 'group_id', 'api_id', 'content', 'label', 'required');
+	protected $exportProps = array('page', 'rectangle', 'type', 'group_id', 'api_id', 'content', 'label', 'required', 'read_only');
 
 	public $group_id = null;
 	public $api_id = null;
 	public $content = null;
     public $label = null;
 	public $required = true;
+	public $read_only = false;
 
 	public function __construct($page, $rectangle = array(), $type) {
 		$this->page = $page;
@@ -40,7 +41,9 @@ class Field extends ExportObject {
 	public function setContent($content) {
 		$this->content = $content;
 	}
-
+	public function setReadOnly() {
+		$this->read_only = true;
+	}
 	public function setLabel($label) {
 		$this->label = $label;
 	}
